@@ -4,7 +4,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
-	<title>Cadastro com JSF</title>
+	<title>Cadastro de usuário</title>
 </h:head>
 <h:body>
 	<h:form style="display:flex; align-items: center; justify-content: space-between; padding:10px;">
@@ -44,11 +44,33 @@
 				<f:selectItem itemValue="Java Web"/>
 			</h:selectManyMenu>
 			
+			<h:outputLabel value="Ativo:" />
+			<h:selectBooleanCheckbox value="#{pessoaBean.pessoa.ativo}"/>
+			
+			<h:outputLabel value="Login:" />
+			<h:inputText value="#{pessoaBean.pessoa.login}"/>
+			
+			<h:outputLabel value="Senha:" />
+			<h:inputSecret value="#{pessoaBean.pessoa.senha}"/>
+			
+			<h:outputLabel value="Perfil:" />
+			<h:selectOneMenu id="campoPerfil" value="#{pessoaBean.pessoa.perfilUser}">
+				<f:selectItem itemValue="Não informado" itemLabel="[ - Selecione - ]" noSelectionOption="true"/>
+				<f:selectItem itemValue="ADM" itemLabel="Administrador"/>
+				<f:selectItem itemValue="USER" itemLabel="Usuário"/>
+				<f:selectItem itemValue="SEC" itemLabel="Secretário"/>
+				<f:selectItem itemValue="REC" itemLabel="Recepcionista"/>
+			</h:selectOneMenu>
+			
 			<h:outputLabel/>
 			<h:panelGroup>
-				<h:commandButton action="#{pessoaBean.novo()}" value="Novo" />
-				<h:commandButton action="#{pessoaBean.salvar()}" value="Salvar" />
-				<h:commandButton action="#{pessoaBean.remove()}" value="Delete" />
+				<h:commandButton action="#{pessoaBean.novo()}" value="Novo" image="/resources/img/add.png" />
+				<h:outputLabel value=" " />
+				<h:commandButton action="#{pessoaBean.salvar()}" value="Salvar" image="/resources/img/save.png" />
+				<h:outputLabel value=" " />
+				<h:commandButton action="#{pessoaBean.remove()}" value="Delete" image="/resources/img/delete.png" />
+				<h:outputLabel value=" " />
+				<h:commandButton value="Limpar" type="reset" image="/resources/img/reset.png" />
 			</h:panelGroup>
 		
 		</h:panelGrid>
@@ -57,7 +79,7 @@
 	<h:form id="formTable">		
 		<h:dataTable value="#{pessoaBean.pessoas}" var="person" border="1" cellspacing="0" >
 			<f:facet name="header">
-				<h:outputText value="Lista de Usuário"/>
+				<h:outputText value="Lista de Usuários Cadastrados"/>
 			</f:facet>
 			
 			<h:column>
@@ -78,11 +100,14 @@
 			</h:column>
 			<h:column>
 				<f:facet name="header">Ações</f:facet>
-				<h:commandLink value="Editar">
+				<h:commandLink>
 					<f:setPropertyActionListener value="#{person}" target="#{pessoaBean.pessoa}" />
-				</h:commandLink> - 
-				<h:commandLink value="Excluir" action="#{pessoaBean.remove()}">
+					<h:graphicImage value="/resources/img/edit.png" />
+				</h:commandLink> 
+				<h:outputLabel value=" " />
+				<h:commandLink action="#{pessoaBean.remove()}">
 					<f:setPropertyActionListener value="#{person}" target="#{pessoaBean.pessoa}" />
+					<h:graphicImage value="/resources/img/delete.png" />
 				</h:commandLink>
 			</h:column>
 		</h:dataTable>
