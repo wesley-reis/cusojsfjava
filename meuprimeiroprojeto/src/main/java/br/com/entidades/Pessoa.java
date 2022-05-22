@@ -11,31 +11,40 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class Pessoa implements Serializable{
-	
+public class Pessoa implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	private String nome;
 	private String sobrenome;
 	private Integer idade;
-	
+
 	@Temporal(TemporalType.DATE)
 	private Date dataNascimento;
-	
+
 	private String sexo;
-	
+	private String[] frameworks;
+
 	public Pessoa() {
 
 	}
-	
+
+	public String[] getFrameworks() {
+		return frameworks;
+	}
+
+	public void setFrameworks(String[] frameworks) {
+		this.frameworks = frameworks;
+	}
+
 	public String getSexo() {
 		return sexo;
 	}
-	
+
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
@@ -104,7 +113,5 @@ public class Pessoa implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
 
 }
