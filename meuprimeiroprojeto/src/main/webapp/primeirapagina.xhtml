@@ -7,36 +7,32 @@
 	<title>Cadastro com JSF</title>
 </h:head>
 <h:body>
-	
 	<h:form id="formPessoa">
-		<h1>Cadastro Usuários</h1>
-		<div>
+		<h:panelGrid columns="2">
+			<f:facet name="header">
+				<h:outputText value="Cadastro de Usuário"/>
+			</f:facet>
+		
 			<h:outputLabel value="Id:" />
 			<h:inputText value="#{pessoaBean.pessoa.id}" readonly="true"/>
-		</div>
-		<br/>
-		<div>
+	
 			<h:outputLabel value="Nome:" />
 			<h:inputText value="#{pessoaBean.pessoa.nome}"/>
-		</div>
-		<br/>
-		<div>
+
 			<h:outputLabel value="Sobrenome:" />
 			<h:inputText value="#{pessoaBean.pessoa.sobrenome}"/>
-		</div>
-		<br/>
-		<div>
+	
 			<h:outputLabel value="Idade:" />
 			<h:inputText value="#{pessoaBean.pessoa.idade}"/>
-		</div>
-		<br/>
-
-			<div>
+			
+			<h:outputLabel/>
+			<h:panelGroup>
 				<h:commandButton action="#{pessoaBean.novo()}" value="Novo" />
 				<h:commandButton action="#{pessoaBean.salvar()}" value="Salvar" />
 				<h:commandButton action="#{pessoaBean.remove()}" value="Delete" />
-			</div>
-		<br/>
+			</h:panelGroup>
+		
+		</h:panelGrid>
 	</h:form>
 	<br/>
 	<hr/>
