@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>JSF | Lançamenoto</title>
+</h:head>
+<h:body>
+
+	<h:form style="display:flex; align-items: center; justify-content: space-between; padding-top:5px; padding-right: 10px; padding-left:10px;">
+		<h:graphicImage width="110" height="110" library="img" name="jsf.png"/>
+		<div  style="display:flex; align-items: center; justify-content: space-between; gap: 15px;">
+			<h:commandLink action="primeirapagina" value="Administração" />
+			<h:commandLink action="lancamento" value="Lançamentos" />
+			<h:commandLink action="index" value="Trocar usuário" />
+		</div>
+	</h:form>
+	
+	<h:form id="formLancamento">
+		<h:panelGrid columns="2">
+			<f:facet name="header">
+				<h:outputText value="Lançamentos"/>
+			</f:facet>
+		
+	
+		
+		</h:panelGrid>
+	</h:form>
+	<hr/>
+
+
+
+</h:body>
+</html>
