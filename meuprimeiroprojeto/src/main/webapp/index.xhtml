@@ -19,13 +19,14 @@
 
 		
 		<h:panelGrid columns="2" style="width: 300px;
+										border-radius:10px;
 										height: 300px;
 										padding:20px;
 										background: #F8F9FA;
 										display: flex-col;">
 		<h:outputLabel/>
 		<h:panelGroup>
-			<h1>Realize o login</h1>
+			<h1>Login</h1>
 		</h:panelGroup>
 				
 			<h:outputLabel value="Login:" />
@@ -34,7 +35,7 @@
 			<h:outputLabel value="Senha:" />
 			<h:inputSecret value="#{pessoaBean.pessoa.senha}"/>
 			
-			<h:commandButton value="Fazer Login" />
+			<h:commandButton action="#{pessoaBean.logar()}" value="Fazer Login" />
 		</h:panelGrid>
 	</h:form>
 	<br/>
