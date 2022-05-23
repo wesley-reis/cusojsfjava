@@ -4,18 +4,37 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
-	<title>Cadastro com JSF</title>
+	<title>JSF | Login</title>
 </h:head>
 <h:body>
 	
-	<h:form id="formLogin">
-		<h1>Realize o login</h1>
-		<h:panelGrid columns="2">
+	<h:form id="formLogin" style="width: 100vw;
+								height: 100vh;
+								display: flex;
+								flex-direction: row;
+								justify-content: center;
+								align-items: center;">
+								
+	
+
+		
+		<h:panelGrid columns="2" style="width: 300px;
+										height: 300px;
+										padding:20px;
+										background: #F8F9FA;
+										display: flex-col;">
+		<h:outputLabel/>
+		<h:panelGroup>
+			<h1>Realize o login</h1>
+		</h:panelGroup>
+				
 			<h:outputLabel value="Login:" />
 			<h:inputText value="#{pessoaBean.pessoa.login}"/>
 			
 			<h:outputLabel value="Senha:" />
 			<h:inputSecret value="#{pessoaBean.pessoa.senha}"/>
+			
+			<h:commandButton value="Fazer Login" />
 		</h:panelGrid>
 	</h:form>
 	<br/>
