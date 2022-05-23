@@ -4,20 +4,20 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
-	<title>Cadastro de usuário</title>
+	<title>JSF | Cad. Usuário</title>
 </h:head>
 <h:body>
 
 	<h:form style="display:flex; align-items: center; justify-content: space-between; padding-top:5px; padding-right: 10px; padding-left:10px;">
 		<h:graphicImage width="110" height="110" library="img" name="jsf.png"/>
 		<div  style="display:flex; align-items: center; justify-content: space-between; gap: 15px;">
-			<h:commandLink action="primeirapagina" value="Administração" />
-			<h:commandLink action="lancamento" value="Lançamentos" />
-			<h:commandLink action="index" value="Trocar usuário" />
+			<h:commandLink action="primeirapagina?faces-redirect=true" value="Administração" rendered="#{pessoaBean.permitirAcesso('ADM')}"/>
+			<h:commandLink action="lancamento?faces-redirect=true" value="Lançamentos" />
+			<h:commandLink action="index?faces-redirect=true" value="Trocar usuário" />
 		</div>
 	</h:form>
 	
-	<h:form id="formPessoa">
+	<h:form id="formPessoa"  rendered="#{pessoaBean.permitirAcesso('ADM')}">
 		<h:panelGrid columns="2">
 			<f:facet name="header">
 				<h:outputText value="Cadastro de Usuário"/>
@@ -82,7 +82,7 @@
 		</h:panelGrid>
 	</h:form>
 	<hr/>
-	<h:form id="formTable">		
+	<h:form id="formTable"  rendered="#{pessoaBean.permitirAcesso('ADM')}">		
 		<h:dataTable value="#{pessoaBean.pessoas}" var="person" border="1" cellspacing="0" >
 			<f:facet name="header">
 				<h:outputText value="Lista de Usuários Cadastrados"/>

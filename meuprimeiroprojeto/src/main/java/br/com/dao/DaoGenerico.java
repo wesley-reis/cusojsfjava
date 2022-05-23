@@ -41,7 +41,7 @@ public class DaoGenerico<E> {
 		
 		Object id = JPAUtil.getPrimaryKey(entidade);
 				
-		entityManager.createQuery("delete from " + entidade.getClass().getCanonicalName() + " id = " + id).executeUpdate();
+		entityManager.createQuery("delete from " + entidade.getClass().getCanonicalName() + " where id = " + id).executeUpdate();
 		
 		entityTransaction.commit();
 		entityManager.close();
