@@ -1,5 +1,10 @@
 package br.com.cursojsf;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,8 +14,11 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import com.google.gson.Gson;
 
 import br.com.dao.DaoGenerico;
 import br.com.entidades.Pessoa;
@@ -27,6 +35,43 @@ public class PessoaBean {
 	
 	private IDaoPessoa idaoPessoa = new IDaoPessoaImpl();
 	
+	
+	public void pesquisaCep(AjaxBehaviorEvent event) {
+				
+		try {
+			
+			URL url = new URL("https://viacep.com.br/ws/"+pessoa.getCep()+"/json/");
+			
+			URLConnection connection = url.openConnection();
+			InputStream is = connection.getInputStream();
+			BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+			
+			String cep = "";
+			StringBuilder jsonCep = new StringBuilder();
+			
+			while ((cep = br.readLine()) != null) {
+				
+				jsonCep.append(cep);
+				
+			}
+						
+			Pessoa gsonAux = new Gson().fromJson(jsonCep.toString(), Pessoa.class);
+			
+			pessoa.setCep(gsonAux.getCep());
+			pessoa.setLogradouro(gsonAux.getLogradouro());
+			pessoa.setComplemento(gsonAux.getComplemento());
+			pessoa.setBairro(gsonAux.getBairro());
+			pessoa.setLocalidade(gsonAux.getLocalidade());
+			pessoa.setUf(gsonAux.getUf());		
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			mostrarMsg("Erro ao consultar o cep");
+		}
+		
+	}
+	
 	public String salvar() {
 		pessoa = daoGenerico.merge(pessoa);
 		carregarPessoas();
@@ -42,6 +87,11 @@ public class PessoaBean {
 	}
 
 	public String novo() {
+		pessoa = new Pessoa();
+		return "";
+	}
+	
+	public String limpar() {
 		pessoa = new Pessoa();
 		return "";
 	}

@@ -69,6 +69,12 @@ public class LancamentoBean {
 		return "";
 	}
 	
+	public String limpar() {
+		lancamento = new Lancamento();
+		
+		return "";
+	}
+	
 	public String remove() {
 		daoGenerico.delete(lancamento);
 		lancamento = new Lancamento();

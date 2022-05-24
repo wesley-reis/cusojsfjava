@@ -31,13 +31,17 @@
 				
 				<h:outputLabel/>
 				<h:panelGroup>
-					<h:commandButton action="#{lancamentoBean.novo()}" value="Novo" image="/resources/img/add.png" />
+					<h:commandButton action="#{lancamentoBean.novo()}" value="Novo" image="/resources/img/add.png">
+						<f:ajax execute="botaoNovo" render="@form"/>
+					</h:commandButton>
 					<h:outputLabel value=" " />
 					<h:commandButton action="#{lancamentoBean.salvar()}" value="Salvar" image="/resources/img/save.png" />
 					<h:outputLabel value=" " />
 					<h:commandButton action="#{lancamentoBean.remove()}" value="Delete" image="/resources/img/delete.png" />
 					<h:outputLabel value=" " />
-					<h:commandButton value="Limpar" type="reset" image="/resources/img/reset.png" />
+					<h:commandButton value="Limpar" action="#{lancamentoBean.limpar()}" image="/resources/img/reset.png">
+						<f:ajax execute="botaoLimpar" render="@form"/>
+					</h:commandButton>
 				</h:panelGroup>
 			
 			</h:panelGrid>

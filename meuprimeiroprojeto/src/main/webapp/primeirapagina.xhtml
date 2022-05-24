@@ -38,6 +38,12 @@
 				<h:outputLabel value="Idade:" />
 				<h:inputText value="#{pessoaBean.pessoa.idade}"/>
 				
+				<h:outputLabel value="CPF:" />
+				<h:inputText value="#{pessoaBean.pessoa.cpf}"/>
+				
+				<h:outputLabel value="Titulo Eleitor:" />
+				<h:inputText value="#{pessoaBean.pessoa.tituloEleitor}"/>
+				
 				<h:outputLabel value="Sexo:" />
 				<h:selectOneMenu id="campoSexo" value="#{pessoaBean.pessoa.sexo}">
 					<f:selectItem itemValue="Não informado" itemLabel="[ - Selecione - ]" noSelectionOption="true"/>
@@ -60,6 +66,34 @@
 				
 				<h:outputLabel value="Ativo:" />
 				<h:selectBooleanCheckbox value="#{pessoaBean.pessoa.ativo}"/>
+				
+	
+				<h:outputLabel value="CEP:" />
+				<h:inputText value="#{pessoaBean.pessoa.cep}">
+					<f:ajax event="blur" execute="@this"
+						 listener="#{pessoaBean.pesquisaCep}"
+						 render="logradouro complemento bairro localidade uf"
+					  />
+				</h:inputText>
+				
+				<h:outputLabel value="Rua:" />
+				<h:inputText value="#{pessoaBean.pessoa.logradouro}" id="logradouro"/>
+				
+				<h:outputLabel value="Número" />
+				<h:inputText value="#{pessoaBean.pessoa.numero}"/>
+				
+				<h:outputLabel value="Complemento:" />
+				<h:inputText value="#{pessoaBean.pessoa.complemento}" id="complemento"/>
+				
+				<h:outputLabel value="Bairro:" />
+				<h:inputText value="#{pessoaBean.pessoa.bairro}" id="bairro"/>
+				
+				
+				<h:outputLabel value="Cidade:" />
+				<h:inputText value="#{pessoaBean.pessoa.localidade}" id="localidade"/>
+				
+				<h:outputLabel value="UF" />
+				<h:inputText value="#{pessoaBean.pessoa.uf}" id="uf"/>
 				
 				<h:outputLabel value="Login:" />
 				<h:inputText value="#{pessoaBean.pessoa.login}"/>
@@ -97,13 +131,17 @@
 				
 				<h:outputLabel/>
 				<h:panelGroup>
-					<h:commandButton action="#{pessoaBean.novo()}" value="Novo" image="/resources/img/add.png" />
+					<h:commandButton action="#{pessoaBean.novo()}" value="Novo" image="/resources/img/add.png">
+						<f:ajax execute="botaoNovo" render="@form"/>
+					</h:commandButton>
 					<h:outputLabel value=" " />
 					<h:commandButton action="#{pessoaBean.salvar()}" value="Salvar" image="/resources/img/save.png" />
 					<h:outputLabel value=" " />
 					<h:commandButton action="#{pessoaBean.remove()}" value="Delete" image="/resources/img/delete.png" rendered="#{pessoaBean.permitirAcesso('ADM')}" />
 					<h:outputLabel value=" " />
-					<h:commandButton value="Limpar" type="reset" image="/resources/img/reset.png" />
+					<h:commandButton value="Limpar" action="#{pessoaBean.limpar()}" image="/resources/img/reset.png">
+						<f:ajax execute="botaoLimpar" render="@form"/>
+					</h:commandButton>
 				</h:panelGroup>
 			
 			</h:panelGrid>
