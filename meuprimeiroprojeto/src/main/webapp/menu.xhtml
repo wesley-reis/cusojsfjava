@@ -2,17 +2,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html">
-<h:head>
-	<title>JSF | Cad. Usuário</title>
-</h:head>
-<h:body>
 
-	<h:form style="display:flex; align-items: center; justify-content: space-between; padding-top:5px; padding-right: 10px; padding-left:10px;">
-		<h:graphicImage width="110" height="110" library="img" name="jsf.png"/>
+<h:body style="padding:0; margin:0">
+
+	<h:form style="display:flex; align-items: center; justify-content: space-between; padding-right: 20px; padding-left:20px; background: #2b364a; color:#21a3a3;">
+		<h:graphicImage library="img" name="jsf.png"/>
 		<div  style="display:flex; align-items: center; justify-content: space-between; gap: 15px;">
-			<h:commandLink action="primeirapagina?faces-redirect=true" value="Administração" rendered="#{pessoaBean.permitirAcesso('ADM')}"/>
-			<h:commandLink action="lancamento?faces-redirect=true" value="Lançamentos" />
-			<h:commandLink action="index?faces-redirect=true" value="Sair"/>
+			<h:commandLink style="color:#d5ded9; text-decoration:none;" action="primeirapagina?faces-redirect=true" value="Administração" rendered="#{pessoaBean.permitirAcesso('ADM')}"/>
+			<h:commandLink style="color:#d5ded9; text-decoration:none;" action="lancamento?faces-redirect=true" value="Lançamentos" />
+			<h:commandLink style="color:#e84a5f; text-decoration:none;" action="index?faces-redirect=true" value="Sair"/>
 			<h:outputText value="#{pessoaBean.userLogado().nome}"/>
 		</div>
 	</h:form>
