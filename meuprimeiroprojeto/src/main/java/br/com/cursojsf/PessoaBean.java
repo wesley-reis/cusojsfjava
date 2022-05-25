@@ -36,6 +36,7 @@ public class PessoaBean {
 	private IDaoPessoa idaoPessoa = new IDaoPessoaImpl();
 	
 	
+	
 	public void pesquisaCep(AjaxBehaviorEvent event) {
 				
 		try {
@@ -120,6 +121,21 @@ public class PessoaBean {
 
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
+	}
+	
+	
+	public String deslogar() {
+		
+		//recuperar usuario na sessão usuarioLogado
+		FacesContext context = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = context.getExternalContext();
+		externalContext.getSessionMap().remove("usuarioLogado");
+		
+		HttpServletRequest httpServletRequest =  (HttpServletRequest) context.getExternalContext().getRequest();
+		
+		httpServletRequest.getSession().invalidate();
+					
+		return "index.jsf";
 	}
 	
 	
