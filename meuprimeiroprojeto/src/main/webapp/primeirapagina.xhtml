@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 <h:head>
 	<title>JSF | Cad. Usuário</title>
 </h:head>
@@ -27,7 +28,8 @@
 		
 				<h:outputLabel value="Nome:" />
 				<h:inputText value="#{pessoaBean.pessoa.nome}" required="true" 
-					requiredMessage="Informe nome do usuário"
+					pt:placeholder="Informe o nome do usuário"
+					requiredMessage="Informe o nome do usuário"
 					validatorMessage="Nome tem que ter no minimo 3 e no máximo 15 letras" >
 					<f:validateLength minimum="3" maximum="15"/>
 				</h:inputText>
@@ -52,7 +54,9 @@
 				</h:selectOneMenu>
 				
 				<h:outputLabel value="Data Nascimento:" />
-				<h:inputText value="#{pessoaBean.pessoa.dataNascimento}" converterMessage="Data Nascimento errada!">
+				<h:inputText value="#{pessoaBean.pessoa.dataNascimento}"
+					pt:placeholder="00/00/0000"
+					converterMessage="Data Nascimento errada!">
 					<f:convertDateTime timeZone="America/Sao_Paulo" pattern="dd/mm/yyyy"/>
 				</h:inputText>
 				
@@ -127,6 +131,19 @@
 					<f:selectItem itemValue="5" itemLabel="Laravel"/>
 					<f:selectItem itemValue="6" itemLabel="Vue"/>
 				</h:selectManyCheckbox>
+				
+				<h:outputLabel value="Estados:" />
+				<h:selectOneMenu value="#{pessoaBean.pessoa.estados}" immediate="true" id="comboEstados" converter="estadoConverter">
+					<f:selectItem itemLabel="selecione um estado" noSelectionOption="true"/>
+					<f:selectItems value="#{pessoaBean.estados}"/>
+					<f:ajax event="change" execute="@this"  render="comboCidades" listener="#{pessoaBean.carregaCidades}"/>
+				</h:selectOneMenu>
+				
+				<h:outputLabel value="Cidades:" />
+				<h:selectOneMenu value="#{pessoaBean.pessoa.cidades}" id="comboCidades"  immediate="true" converter="cidadeConverter">
+					<f:selectItem itemLabel="selecione uma cidade" noSelectionOption="true"/>
+					<f:selectItems value="#{pessoaBean.cidades}"/>
+				</h:selectOneMenu>
 							
 				
 				<h:outputLabel/>
@@ -172,12 +189,12 @@
 				</h:column>
 				<h:column>
 					<f:facet name="header">Ações</f:facet>
-					<h:commandLink>
+					<h:commandLink immediate="true" action="#{pessoaBean.editar}">
 						<f:setPropertyActionListener value="#{person}" target="#{pessoaBean.pessoa}" />
 						<h:graphicImage value="/resources/img/edit.png" />
 					</h:commandLink> 
 					<h:outputLabel value=" " />
-					<h:commandLink action="#{pessoaBean.remove()}" rendered="#{pessoaBean.permitirAcesso('ADM')}">
+					<h:commandLink action="#{pessoaBean.remove()}" immediate="true" rendered="#{pessoaBean.permitirAcesso('ADM')}">
 						<f:setPropertyActionListener value="#{person}" target="#{pessoaBean.pessoa}" />
 						<h:graphicImage value="/resources/img/delete.png" />
 					</h:commandLink>

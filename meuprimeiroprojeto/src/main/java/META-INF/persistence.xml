@@ -6,9 +6,11 @@
 
 		<class>br.com.entidades.Pessoa</class>
 		<class>br.com.entidades.Lancamento</class>
+		<class>br.com.entidades.Estados</class>
+		<class>br.com.entidades.Cidades</class>
 		
 		<properties>
-			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/db_programajsf"/>
+			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/programajsf"/>
 			<property name="javax.persistence.jdbc.user" value="postgres"/>
 			<property name="javax.persistence.jdbc.password" value="admin"/>
 			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
