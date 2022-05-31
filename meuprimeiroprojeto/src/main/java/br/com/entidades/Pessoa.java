@@ -3,10 +3,14 @@ package br.com.entidades;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -52,10 +56,43 @@ public class Pessoa implements Serializable {
 	private Cidades cidades;
 
 	@Transient // não grava no banco de dados
-	private Estados estados;;
+	private Estados estados;
+
+	@Column(columnDefinition = "text") /* Grava arquivos em base 64 */
+	private String fotoIconBase64;
+	
+	private String extensao; /* extensao jpg, png,jpeg */
+
+	@Lob /* Gravar arquivos no banco de dados */
+	@Basic(fetch = FetchType.LAZY)
+	private byte[] fotoIconBase64Original;
 
 	public Pessoa() {
 
+	}
+
+	public String getFotoIconBase64() {
+		return fotoIconBase64;
+	}
+
+	public void setFotoIconBase64(String fotoIconBase64) {
+		this.fotoIconBase64 = fotoIconBase64;
+	}
+
+	public String getExtensao() {
+		return extensao;
+	}
+
+	public void setExtensao(String extensao) {
+		this.extensao = extensao;
+	}
+
+	public byte[] getFotoIconBase64Original() {
+		return fotoIconBase64Original;
+	}
+
+	public void setFotoIconBase64Original(byte[] fotoIconBase64Original) {
+		this.fotoIconBase64Original = fotoIconBase64Original;
 	}
 
 	public Cidades getCidades() {

@@ -10,8 +10,9 @@
 		<div  style="display:flex; align-items: center; justify-content: space-between; gap: 15px;">
 			<h:commandLink style="color:#d5ded9; text-decoration:none;" action="primeirapagina?faces-redirect=true" value="Administração" rendered="#{pessoaBean.permitirAcesso('ADM')}"/>
 			<h:commandLink style="color:#d5ded9; text-decoration:none;" action="lancamento?faces-redirect=true" value="Lançamentos" />
-			<h:commandLink style="color:#e84a5f; text-decoration:none;" action="#{pessoaBean.deslogar()}" value="Sair"/>
+			<h:graphicImage width="40" height="40" value="#{pessoaBean.userLogado().fotoIconBase64}" style="border-radius: 100%;" />
 			<h:outputText value="#{pessoaBean.userLogado().nome}"/>
+			<h:commandLink style="color:#e84a5f; text-decoration:none;" action="#{pessoaBean.deslogar()}" value="Sair"/>
 		</div>
 	</h:form>
 	
