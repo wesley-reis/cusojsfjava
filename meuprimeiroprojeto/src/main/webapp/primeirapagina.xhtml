@@ -173,7 +173,7 @@
 					<h:commandButton action="#{pessoaBean.salvar()}" value="Salvar"
 						image="/resources/img/save.png" />
 					<h:outputLabel value=" " />
-					<h:commandButton action="#{pessoaBean.remove()}" value="Delete"
+					<h:commandButton action="#{pessoaBean.remove()}" value="Delete" immediate="true"
 						image="/resources/img/delete.png"
 						rendered="#{pessoaBean.permitirAcesso('ADM')}" />
 					<h:outputLabel value=" " />

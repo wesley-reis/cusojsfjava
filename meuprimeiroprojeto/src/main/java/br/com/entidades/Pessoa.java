@@ -15,6 +15,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.br.CPF;
+import org.hibernate.validator.constraints.br.TituloEleitoral;
 
 @Entity
 public class Pessoa implements Serializable {
@@ -25,8 +33,16 @@ public class Pessoa implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
+	@NotEmpty
+	@Size(min = 3, max = 15, message = "Nome deve ter entre 3 e 15 letras")
 	private String nome;
+	
+	@NotEmpty(message = "Campo sobrenome obrigatório")
+	@NotNull(message = "Campo sobrenome obrigatório")
 	private String sobrenome;
+	
+	@DecimalMin(value = "10", message = "Idade deve ser maior que 10")
+	@DecimalMax(value = "100", message = "Idade máxima 100")
 	private Integer idade;
 
 	@Temporal(TemporalType.DATE)
@@ -41,9 +57,12 @@ public class Pessoa implements Serializable {
 	private String nivelProgramador;
 	private Integer[] linguagens;
 
+	@CPF(message = "Cpf inválido")
 	private String cpf;
 
+	@TituloEleitoral(message = "Titulo inválido")
 	private String tituloEleitor;
+	
 	private String cep;
 	private String logradouro;
 	private String complemento;
