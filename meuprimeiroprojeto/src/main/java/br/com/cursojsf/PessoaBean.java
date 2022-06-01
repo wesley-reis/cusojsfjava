@@ -132,6 +132,10 @@ public class PessoaBean {
 		return "";
 	}
 
+	public void registralog() {
+		System.out.println("Metodo registra log");
+	}
+
 	private void mostrarMsg(String msg) {
 		FacesContext context = FacesContext.getCurrentInstance();
 		FacesMessage message = new FacesMessage(msg);
@@ -331,7 +335,7 @@ public class PessoaBean {
 
 		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext()
 				.getResponse();
-		
+
 		response.addHeader("Content-Disposition", "attachment; filename=download." + pessoa.getExtensao());
 		response.setContentType("application/octet-stream");
 		response.setContentLength(pessoa.getFotoIconBase64Original().length);

@@ -170,7 +170,7 @@
 						<f:ajax execute="botaoNovo" render="@form" />
 					</h:commandButton>
 					<h:outputLabel value=" " />
-					<h:commandButton action="#{pessoaBean.salvar()}" value="Salvar"
+					<h:commandButton action="#{pessoaBean.salvar()}" value="Salvar" actionListener="#{pessoaBean.registralog}"
 						image="/resources/img/save.png" />
 					<h:outputLabel value=" " />
 					<h:commandButton action="#{pessoaBean.remove()}" value="Delete" immediate="true"
