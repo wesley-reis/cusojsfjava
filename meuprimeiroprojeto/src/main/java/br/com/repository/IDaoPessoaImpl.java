@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
 
 import br.com.entidades.Estados;
 import br.com.entidades.Pessoa;
@@ -29,7 +30,13 @@ public class IDaoPessoaImpl implements IDaoPessoa, Serializable {
 		EntityTransaction entityTransaction = entityManager.getTransaction();
 		entityTransaction.begin();
 		
-		pessoa = (Pessoa) entityManager.createQuery("select p from Pessoa p where p.login = '" + login + "' and p.senha = '" + senha + "'").getSingleResult();
+		try {
+			pessoa = (Pessoa) entityManager.createQuery("select p from Pessoa p where p.login = '" + login + "' and p.senha = '" + senha + "'")
+					.getSingleResult();
+			
+		} catch (NoResultException e) { /* Tratamento se não encontrar usuário com login e senha*/
+			// handle exception
+		}
 		
 		entityTransaction.commit();
 		

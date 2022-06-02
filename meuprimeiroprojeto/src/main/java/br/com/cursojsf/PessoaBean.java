@@ -17,7 +17,6 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
-import javax.faces.component.html.HtmlSelectOneMenu;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
@@ -40,6 +39,7 @@ import br.com.entidades.Estados;
 import br.com.entidades.Pessoa;
 import br.com.jpautil.JPAUtil;
 import br.com.repository.IDaoPessoa;
+import net.bootsfaces.component.selectOneMenu.SelectOneMenu;
 
 @ViewScoped
 @Named(value = "pessoaBean")
@@ -104,41 +104,54 @@ public class PessoaBean implements Serializable {
 
 	}
 
-	public String salvar() throws IOException {
+	public String salvar() throws IOException{
+		
+		try {
+			
+			/* Processar imagem */	
+			byte[] imagemByte = getByte(arquivofoto.getInputStream());
+				
 
-		/* Processar imagem */
+			/* transformar em bufferimage */
+			BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imagemByte));
+			
+			System.out.println(bufferedImage);
+			
 
-		byte[] imagemByte = getByte(arquivofoto.getInputStream());
 
-		/* savando a imagem original */
-		pessoa.setFotoIconBase64Original(imagemByte);
+			/* savando a imagem original */
+			pessoa.setFotoIconBase64Original(imagemByte);
+			
+			/* Pegar o tipo da imagem */
+			int type = bufferedImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : bufferedImage.getType();
+			int largura = 200;
+			int altura = 200;
 
-		/* transformar em bufferimage */
-		BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imagemByte));
+			/* Criar a miniatura */
+			BufferedImage resizedImage = new BufferedImage(largura, altura, type);
+			Graphics2D g = resizedImage.createGraphics();
+			g.drawImage(bufferedImage, 0, 0, largura, altura, null);
+			g.dispose();
 
-		/* Pegar o tipo da imagem */
-		int type = bufferedImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : bufferedImage.getType();
-		int largura = 200;
-		int altura = 200;
+			/* Escrever novamente a imagem em tamnaho menor */
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			String extensao = arquivofoto.getContentType().split("\\/")[1];/* image/png */
+			ImageIO.write(resizedImage, extensao, baos);
 
-		/* Criar a miniatura */
-		BufferedImage resizedImage = new BufferedImage(largura, altura, type);
-		Graphics2D g = resizedImage.createGraphics();
-		g.drawImage(bufferedImage, 0, 0, largura, altura, null);
-		g.dispose();
+			String miniImagem = "data:" + arquivofoto.getContentType() + ";base64,"
+					+ DatatypeConverter.printBase64Binary(baos.toByteArray());
 
-		/* Escrever novamente a imagem em tamnaho menor */
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		String extensao = arquivofoto.getContentType().split("\\/")[1];/* image/png */
-		ImageIO.write(resizedImage, extensao, baos);
+			/* Processar imagem */
+			pessoa.setFotoIconBase64(miniImagem);
+			pessoa.setExtensao(extensao);
 
-		String miniImagem = "data:" + arquivofoto.getContentType() + ";base64,"
-				+ DatatypeConverter.printBase64Binary(baos.toByteArray());
+			
+		} catch (Exception e1) {
+			  e1.printStackTrace();
+		}
 
-		/* Processar imagem */
-		pessoa.setFotoIconBase64(miniImagem);
-		pessoa.setExtensao(extensao);
-
+		
+		
 		pessoa = daoGenerico.merge(pessoa);
 		carregarPessoas();
 		mostrarMsg("Cadastrado com sucesso!");
@@ -170,6 +183,7 @@ public class PessoaBean implements Serializable {
 		daoGenerico.delete(pessoa);
 		carregarPessoas();
 		pessoa = new Pessoa();
+		mostrarMsg("removido com sucesso!");
 		return "";
 	}
 
@@ -219,6 +233,8 @@ public class PessoaBean implements Serializable {
 			session.setAttribute("usuarioLogado", pessoaUser);
 
 			return "primeirapagina.jsf";
+		}else {
+			FacesContext.getCurrentInstance().addMessage("msgLogin", new FacesMessage("Usuário ou senha inválidos"));
 		}
 
 		return "index.jsf";
@@ -259,7 +275,7 @@ public class PessoaBean implements Serializable {
 	@SuppressWarnings("unchecked")
 	public void carregaCidades(AjaxBehaviorEvent event) {
 		
-		Estados estado = (Estados) ((HtmlSelectOneMenu) event.getSource()).getValue();
+		Estados estado = (Estados) ((SelectOneMenu) event.getSource()).getValue();
 
 		if (estado != null) {
 			pessoa.setEstados(estado);
@@ -317,7 +333,7 @@ public class PessoaBean implements Serializable {
 		return arquivofoto;
 	}
 
-	/* Metodo que cpnverte inputStream para array de bytes */
+	/* Metodo que converte inputStream para array de bytes */
 	@SuppressWarnings("unused")
 	private byte[] getByte(InputStream is) throws IOException {
 		int len;

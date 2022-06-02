@@ -1,43 +1,50 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:b="http://bootsfaces.net/ui"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
 	<title>JSF | Login</title>
 </h:head>
 <h:body>
-	
-	<h:form id="formLogin" style="width: 100vw;
+	<b:messages autoUpdate="true" id="msgLogin" />
+	<b:form id="formLogin" style="width: 100vw;
 								height: 100vh;
 								display: flex;
-								flex-direction: row;
+								flex-direction: col;
 								justify-content: center;
 								align-items: center;">
-								
-	
-
 		
-		<h:panelGrid columns="2" style="width: 300px;
+		<b:panelGrid columns="2" style="width: 400px;
+										width: 100%;
 										border-radius:10px;
-										height: 300px;
+										height: 400px;
 										padding:20px;
 										background: #F8F9FA;
 										display: flex-col;">
-		<h:outputLabel/>
-		<h:panelGroup>
-			<h1>Login</h1>
-		</h:panelGroup>
-				
-			<h:outputLabel value="Login:" />
-			<h:inputText value="#{pessoaBean.pessoa.login}"/>
+			<h:outputLabel/>
+			<h:panelGroup>
+				<h1>Login</h1>
+			</h:panelGroup>
 			
-			<h:outputLabel value="Senha:" />
-			<h:inputSecret value="#{pessoaBean.pessoa.senha}"/>
+			<b:column>
+				<h:outputLabel value="Login:" />
+				<b:inputText id="login" value="#{pessoaBean.pessoa.login}" required="true" requiredMessage="Informe o login"/>
+				<b:message for="login" style="margin-top:-15px; padding:0; background: transparent; border: none;"/>
+			</b:column>
 			
-			<h:commandButton action="#{pessoaBean.logar()}" value="Fazer Login" />
-		</h:panelGrid>
-	</h:form>
+			<b:column>
+				<h:outputLabel value="Senha:" />
+				<b:inputSecret id="pwd" value="#{pessoaBean.pessoa.senha}"  required="true" requiredMessage="Informe a senha"/>
+				<b:message for="pwd" style="margin-top:-15px; padding:0; background: transparent; border: none;"/>
+			</b:column>
+			
+			<b:column>
+				<b:commandButton look="info" action="#{pessoaBean.logar()}" value="Fazer Login" style="width: 100%; margin-top:10px;" />
+			</b:column>
+		</b:panelGrid>
+	</b:form>
 	<br/>
 
 </h:body>

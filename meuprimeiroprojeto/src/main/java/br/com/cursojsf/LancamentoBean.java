@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
@@ -52,9 +53,18 @@ public class LancamentoBean implements Serializable {
 		
 		carregarLancamentos();
 		
+		mostrarMsg("Cadastrado com sucesso!");
+		
 		return "";
 	}
 	
+	
+	private void mostrarMsg(String msg) {
+		FacesContext context = FacesContext.getCurrentInstance();
+		FacesMessage message = new FacesMessage(msg);
+		context.addMessage(null, message);
+
+	}
 	
 	@PostConstruct
 	private void carregarLancamentos(){
@@ -86,6 +96,8 @@ public class LancamentoBean implements Serializable {
 		daoGenerico.delete(lancamento);
 		lancamento = new Lancamento();
 		carregarLancamentos();
+		
+		mostrarMsg("removido com sucesso!");
 		return "";
 	}
 	
