@@ -1,56 +1,62 @@
 package br.com.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 import br.com.jpautil.JPAUtil;
 
-public class DaoGenerico<E> {
+@Named
+public class DaoGenerico<E> implements Serializable{
+	
+
+	private static final long serialVersionUID = 1L;
+
+	@Inject
+	private EntityManager entityManager;
+	
+	@Inject
+	private JPAUtil jpaUtil;
 	
 	public void salvar(E entidade) {
-		EntityManager entityManager = JPAUtil.getEntityManager();
 		EntityTransaction entityTransaction = entityManager.getTransaction();
 		entityTransaction.begin();
 		
 		entityManager.persist(entidade);
 		
 		entityTransaction.commit();
-		entityManager.close();
 	}
 	
 	public E merge(E entidade) {
-		EntityManager entityManager = JPAUtil.getEntityManager();
 		EntityTransaction entityTransaction = entityManager.getTransaction();
 		entityTransaction.begin();
 		
 		E retorno = entityManager.merge(entidade);
 		
 		entityTransaction.commit();
-		entityManager.close();
 		
 		return retorno;
 	}
 	
 	
 	public void delete(E entidade) {
-		EntityManager entityManager = JPAUtil.getEntityManager();
 		EntityTransaction entityTransaction = entityManager.getTransaction();
 		entityTransaction.begin();
 		
-		Object id = JPAUtil.getPrimaryKey(entidade);
+		Object id = jpaUtil.getPrimaryKey(entidade);
 				
 		entityManager.createQuery("delete from " + entidade.getClass().getCanonicalName() + " where id = " + id).executeUpdate();
 		
 		entityTransaction.commit();
-		entityManager.close();
 	}
 	
 	
 	@SuppressWarnings("unchecked")
 	public List<E> getListEntity(Class<E> entidade){
-		EntityManager entityManager = JPAUtil.getEntityManager();
 		EntityTransaction entityTransaction = entityManager.getTransaction();
 		entityTransaction.begin();
 		
@@ -58,19 +64,17 @@ public class DaoGenerico<E> {
 		
 				
 		entityTransaction.commit();
-		entityManager.close();
+
 		return retorno;
 	}
 	
 	public E consultar(Class<E> entidade, String codigo) {
-		EntityManager entityManager = JPAUtil.getEntityManager();
 		EntityTransaction entityTransaction = entityManager.getTransaction();
 		entityTransaction.begin();
 		
 		E objeto = (E) entityManager.find(entidade, Long.parseLong(codigo));
 						
 		entityTransaction.commit();
-		entityManager.close();
 		return objeto;
 	}
 	

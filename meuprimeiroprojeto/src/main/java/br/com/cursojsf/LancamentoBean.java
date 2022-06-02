@@ -1,13 +1,15 @@
 package br.com.cursojsf;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -15,16 +17,21 @@ import br.com.dao.DaoGenerico;
 import br.com.entidades.Lancamento;
 import br.com.entidades.Pessoa;
 import br.com.repository.IDaoLancamento;
-import br.com.repository.IDaolancamentoImpl;
 
 @ViewScoped
-@ManagedBean(name = "lancamentoBean")
-public class LancamentoBean {
+@Named(value = "lancamentoBean")
+public class LancamentoBean implements Serializable {
 	
-	private Lancamento lancamento = new Lancamento();
-	private DaoGenerico<Lancamento> daoGenerico = new DaoGenerico<Lancamento>();
+
+	private static final long serialVersionUID = 1L;
+	private Lancamento lancamento = new Lancamento();	
 	private List<Lancamento> lancamentos = new ArrayList<Lancamento>();
-	private IDaoLancamento daoLancamento = new IDaolancamentoImpl();
+	
+	@Inject
+	private DaoGenerico<Lancamento> daoGenerico;
+	
+	@Inject
+	private IDaoLancamento daoLancamento;
 	
 	
 	

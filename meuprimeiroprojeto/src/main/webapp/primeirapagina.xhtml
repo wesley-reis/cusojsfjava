@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 <h:head>
-	<title>JSF | Cad. Usuário</title>
+	<title>JSF | Cad. UsuÃ¡rio</title>
 </h:head>
 <h:body>
 
@@ -21,7 +21,7 @@
 			rendered="#{pessoaBean.permitirAcesso('ADM')}">
 			<h:panelGrid columns="2">
 				<f:facet name="header">
-					<h:outputText value="Cadastro de Usuário" />
+					<h:outputText value="Cadastro de UsuÃ¡rio" />
 				</f:facet>
 
 				<h:outputLabel value="Id:" />
@@ -33,9 +33,9 @@
 
 				<h:outputLabel value="Nome:" />
 				<h:inputText value="#{pessoaBean.pessoa.nome}" required="true"
-					pt:placeholder="Informe o nome do usuário"
-					requiredMessage="Informe o nome do usuário"
-					validatorMessage="Nome tem que ter no minimo 3 e no máximo 15 letras">
+					pt:placeholder="Informe o nome do usuÃ¡rio"
+					requiredMessage="Informe o nome do usuÃ¡rio"
+					validatorMessage="Nome tem que ter no minimo 3 e no mÃ¡ximo 15 letras">
 					<f:validateLength minimum="3" maximum="15" />
 				</h:inputText>
 
@@ -53,7 +53,7 @@
 
 				<h:outputLabel value="Sexo:" />
 				<h:selectOneMenu id="campoSexo" value="#{pessoaBean.pessoa.sexo}">
-					<f:selectItem itemValue="Não informado"
+					<f:selectItem itemValue="NÃ£o informado"
 						itemLabel="[ - Selecione - ]" noSelectionOption="true" />
 					<f:selectItem itemValue="M" itemLabel="Masculino" />
 					<f:selectItem itemValue="F" itemLabel="Feminino" />
@@ -90,7 +90,7 @@
 				<h:outputLabel value="Rua:" />
 				<h:inputText value="#{pessoaBean.pessoa.logradouro}" id="logradouro" />
 
-				<h:outputLabel value="Número" />
+				<h:outputLabel value="NÃºmero" />
 				<h:inputText value="#{pessoaBean.pessoa.numero}" />
 
 				<h:outputLabel value="Complemento:" />
@@ -116,21 +116,21 @@
 				<h:outputLabel value="Perfil:" />
 				<h:selectOneMenu id="campoPerfil"
 					value="#{pessoaBean.pessoa.perfilUser}">
-					<f:selectItem itemValue="Não informado"
+					<f:selectItem itemValue="NÃ£o informado"
 						itemLabel="[ - Selecione - ]" noSelectionOption="true" />
 					<f:selectItem itemValue="ADM" itemLabel="Administrador" />
-					<f:selectItem itemValue="USER" itemLabel="Usuário" />
-					<f:selectItem itemValue="SEC" itemLabel="Secretário" />
+					<f:selectItem itemValue="USER" itemLabel="UsuÃ¡rio" />
+					<f:selectItem itemValue="SEC" itemLabel="SecretÃ¡rio" />
 					<f:selectItem itemValue="REC" itemLabel="Recepcionista" />
 				</h:selectOneMenu>
 
-				<h:outputLabel value="Nível Programador:" />
+				<h:outputLabel value="NÃ­vel Programador:" />
 				<h:selectOneRadio id="campoNivelProgramador"
 					value="#{pessoaBean.pessoa.nivelProgramador}"
 					layout="pageDirection">
 					<f:selectItem itemValue="J" itemLabel="Junior" />
 					<f:selectItem itemValue="P" itemLabel="Pleno" />
-					<f:selectItem itemValue="S" itemLabel="Sênior" />
+					<f:selectItem itemValue="S" itemLabel="SÃªnior" />
 					<f:selectItem itemValue="E" itemLabel="Expecialista" />
 				</h:selectOneRadio>
 
@@ -191,7 +191,7 @@
 			<h:dataTable value="#{pessoaBean.pessoas}" var="person" border="1"
 				cellspacing="0">
 				<f:facet name="header">
-					<h:outputText value="Lista de Usuários Cadastrados" />
+					<h:outputText value="Lista de UsuÃ¡rios Cadastrados" />
 				</f:facet>
 
 				<h:column>
@@ -218,7 +218,7 @@
 					<h:outputText value="#{person.sexo}" />
 				</h:column>
 				<h:column>
-					<f:facet name="header">Ações</f:facet>
+					<f:facet name="header">AÃ§Ãµes</f:facet>
 					<h:commandLink immediate="true" action="#{pessoaBean.editar}">
 						<f:setPropertyActionListener value="#{person}"
 							target="#{pessoaBean.pessoa}" />

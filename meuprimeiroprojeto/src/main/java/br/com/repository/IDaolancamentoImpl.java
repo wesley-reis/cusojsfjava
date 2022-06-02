@@ -1,14 +1,22 @@
 package br.com.repository;
 
+import java.io.Serializable;
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 import br.com.entidades.Lancamento;
-import br.com.jpautil.JPAUtil;
 
-public class IDaolancamentoImpl implements IDaoLancamento {
+@Named
+public class IDaolancamentoImpl implements IDaoLancamento, Serializable {
+	
+
+	private static final long serialVersionUID = 1L;
+	@Inject
+	private EntityManager entityManager;
 
 
 	@SuppressWarnings("unchecked")
@@ -17,14 +25,13 @@ public class IDaolancamentoImpl implements IDaoLancamento {
 		
 		List<Lancamento> lista = null;
 		
-		EntityManager entityManager = JPAUtil.getEntityManager();
 		EntityTransaction transaction = entityManager.getTransaction();
 		transaction.begin();
 		
 		lista = (List<Lancamento>) entityManager.createQuery("from Lancamento where usuario.id = " + codUser).getResultList();
 		
 		transaction.commit();
-		entityManager.close();		
+
 		
 		return lista;
 	}

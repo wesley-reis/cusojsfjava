@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
-	<title>JSF | Lançamenoto</title>
+	<title>JSF | LanÃ§amenoto</title>
 </h:head>
 <h:body>
 
@@ -14,7 +14,7 @@
 		<h:form id="formLancamento">
 			<h:panelGrid columns="2">
 				<f:facet name="header">
-					<h:outputText value="Lançamentos"/>
+					<h:outputText value="LanÃ§amentos"/>
 				</f:facet>
 	
 				<h:outputLabel value="Id:" />
@@ -51,7 +51,7 @@
 		<h:form id="formTableLancamentos">		
 			<h:dataTable value="#{lancamentoBean.lancamentos}" var="lanc" border="1" cellspacing="0" >
 				<f:facet name="header">
-					<h:outputText value="Lista de Lançamentos"/>
+					<h:outputText value="Lista de LanÃ§amentos"/>
 				</f:facet>
 				
 				<h:column>
@@ -59,7 +59,7 @@
 					<h:outputText value="#{lanc.id}"/>
 				</h:column>
 					<h:column>
-					<f:facet name="header">Número Nota</f:facet>
+					<f:facet name="header">NÃºmero Nota</f:facet>
 					<h:outputText value="#{lanc.numeroNotaFiscal}"/>
 				</h:column>
 					<h:column>
@@ -71,7 +71,7 @@
 					<h:outputText value="#{lanc.empresaDestino}"/>
 				</h:column>
 				<h:column>
-					<f:facet name="header">Ações</f:facet>
+					<f:facet name="header">AÃ§Ãµes</f:facet>
 					<h:commandLink>
 						<f:setPropertyActionListener  value="#{lanc}" target="#{lancamentoBean.lancamento}" />
 						<h:graphicImage value="/resources/img/edit.png" />

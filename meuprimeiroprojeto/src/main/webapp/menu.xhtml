@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html">
 
@@ -8,8 +8,8 @@
 	<h:form style="display:flex; align-items: center; justify-content: space-between; padding-right: 20px; padding-left:20px; background: #2b364a; color:#21a3a3;">
 		<h:graphicImage library="img" name="jsf.png"/>
 		<div  style="display:flex; align-items: center; justify-content: space-between; gap: 15px;">
-			<h:commandLink style="color:#d5ded9; text-decoration:none;" action="primeirapagina?faces-redirect=true" value="Administração" rendered="#{pessoaBean.permitirAcesso('ADM')}"/>
-			<h:commandLink style="color:#d5ded9; text-decoration:none;" action="lancamento?faces-redirect=true" value="Lançamentos" />
+			<h:commandLink style="color:#d5ded9; text-decoration:none;" action="primeirapagina?faces-redirect=true" value="AdministraÃ§Ã£o" rendered="#{pessoaBean.permitirAcesso('ADM')}"/>
+			<h:commandLink style="color:#d5ded9; text-decoration:none;" action="lancamento?faces-redirect=true" value="LanÃ§amentos" />
 			<h:graphicImage width="40" height="40" value="#{pessoaBean.userLogado().fotoIconBase64}" style="border-radius: 100%;" />
 			<h:outputText value="#{pessoaBean.userLogado().nome}"/>
 			<h:commandLink style="color:#e84a5f; text-decoration:none;" action="#{pessoaBean.deslogar()}" value="Sair"/>
