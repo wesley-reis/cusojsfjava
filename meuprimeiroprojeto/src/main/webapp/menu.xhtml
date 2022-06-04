@@ -2,20 +2,35 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
  	xmlns:b="http://bootsfaces.net/ui"
+ 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html">
 
 <h:body style="padding:0; margin:0">
 
-	<h:form style="display:flex; align-items: center; justify-content: space-between; padding-right: 20px; padding-left:20px; background: #2b364a; color:#21a3a3;">
-		<h:graphicImage library="img" name="jsf.png"/>
-		<div  style="display:flex; align-items: center; justify-content: space-between; gap: 15px;">
-			<h:commandLink style="color:#d5ded9; text-decoration:none;" action="primeirapagina?faces-redirect=true" value="Administração" rendered="#{pessoaBean.permitirAcesso('ADM')}"/>
-			<h:commandLink style="color:#d5ded9; text-decoration:none;" action="lancamento?faces-redirect=true" value="Lançamentos" />
-			<h:graphicImage width="40" height="40" value="#{pessoaBean.userLogado().fotoIconBase64}" style="border-radius: 100%;" />
-			<h:outputText value="#{pessoaBean.userLogado().nome}"/>
-			<h:commandLink style="color:#e84a5f; text-decoration:none;" action="#{pessoaBean.deslogar()}" value="Sair"/>
-		</div>
-	</h:form>
+	<b:form style="padding:0; margin:0;">
+		<b:navBar brand-img="#{request.contextPath}/resources/img/jsf.png" brand-img-style="margin-top: -15px;" style="background: #2b364a;" >
+		  <b:navbarLinks style="display:flex; align-items: center; justify-content: space-between; padding-right: 20px; padding-left:20px; background: #2b364a; color:#21a3a3; border:none;">
+		    <b:navCommandLink style="color:#d5ded9;border:none;" action="primeirapagina?faces-redirect=true" value="Administração" rendered="#{pessoaBean.permitirAcesso('ADM')}" />
+		    <b:navCommandLink style="color:#d5ded9; border:none;" action="lancamento?faces-redirect=true" value="Lançamentos" />
+		   
+		   	<b:dropMenu style="color:#d5ded9; background: #2b364a;" value="Relatórios">
+		      <b:navCommandLink action="rellancamento?faces-redirect=true" value="Rel. Notas" />
+		      <b:navCommandLink value="Rel. Usuário" />		    
+		    </b:dropMenu>
+			
+			<b:navCommandLink disabled="true" style="cursor: pointer; ">
+			    <h:graphicImage width="40" height="40" value="#{pessoaBean.userLogado().fotoIconBase64}" style="border-radius: 100%;" />
+			</b:navCommandLink>
+		    <b:dropMenu  style="color:#d5ded9; background: #2b364a;" value="#{pessoaBean.userLogado().nome}">
+		      <b:navCommandLink value="Perfil" href="#"/>
+		      <b:navLink></b:navLink>
+		      <b:navCommandLink style="color:#e84a5f;" action="#{pessoaBean.deslogar()}" value="Sair" />		    
+		    </b:dropMenu>		   
+				    
+		  </b:navbarLinks>
+		</b:navBar>
+	</b:form>
+	
 	
 </h:body>
 </html>

@@ -14,46 +14,58 @@
 	<div style="padding-right: 40px; padding-left:40px;">
 		<b:messages autoUpdate="true"/>
 		<b:form id="formLancamento">
-			<b:panelGrid columns="2">
+			<b:panelGrid columns="1">
 				<f:facet name="header">
 					<h:outputText value="Lançamentos"/>
 				</f:facet>
 				
-				<b:column>
-					<h:outputLabel value="Id:" />
-					<b:inputText value="#{lancamentoBean.lancamento.id}" readonly="true"/>				
-				</b:column>
-				
-				<b:column>
-					<h:outputLabel value="Nota:" />
-					<b:inputText value="#{lancamentoBean.lancamento.numeroNotaFiscal}" required="true" requiredMessage="Número da nota obrigatório"/>				
-				</b:column>
-				
-				<b:column>
-					<h:outputLabel value="Origem:" />
-					<b:inputText value="#{lancamentoBean.lancamento.empresaOrigem}"  required="true" requiredMessage="campo obrigatório" />				
-				</b:column>
-				
-				<b:column>
-					<h:outputLabel value="Destino:" />
-					<b:inputText value="#{lancamentoBean.lancamento.empresaDestino}" required="true" requiredMessage="campo obrigatório" />				
-				</b:column>				
-				
-				<b:column>
-					<h:panelGroup>
-						<h:commandButton action="#{lancamentoBean.novo()}" value="Novo" image="/resources/img/add.png">
-							<f:ajax execute="botaoNovo" render="@form"/>
-						</h:commandButton>
-						<h:outputLabel value=" " />
-						<h:commandButton action="#{lancamentoBean.salvar()}" value="Salvar" image="/resources/img/save.png" />
-						<h:outputLabel value=" " />
-						<h:commandButton action="#{lancamentoBean.remove()}" value="Delete" image="/resources/img/delete.png" />
-						<h:outputLabel value=" " />
-						<h:commandButton value="Limpar" action="#{lancamentoBean.limpar()}" image="/resources/img/reset.png">
-							<f:ajax execute="botaoLimpar" render="@form"/>
-						</h:commandButton>
-					</h:panelGroup>
-				</b:column>
+				<b:panel>
+					<b:column>
+						<h:outputLabel value="Id:" />
+						<b:inputText value="#{lancamentoBean.lancamento.id}" readonly="true"/>				
+					</b:column>
+					
+					<b:column>
+						<h:outputLabel value="Nota:" />
+						<b:inputText value="#{lancamentoBean.lancamento.numeroNotaFiscal}" required="true" requiredMessage="Número da nota obrigatório"/>				
+					</b:column>
+					
+					<b:column>
+						<h:outputLabel value="Origem:" />
+						<b:inputText value="#{lancamentoBean.lancamento.empresaOrigem}"  required="true" requiredMessage="campo obrigatório" />				
+					</b:column>
+					
+					<b:column>
+						<h:outputLabel value="Destino:" />
+						<b:inputText value="#{lancamentoBean.lancamento.empresaDestino}" required="true" requiredMessage="campo obrigatório" />				
+					</b:column>		
+					
+					<b:column>
+						<h:outputLabel value="Data inicial:" />
+						<b:dateTimePicker locale="br" format="DD/MM/YYYY" required="true" requiredMessage="Data inicial obrigatória" value="#{lancamentoBean.lancamento.dataIni}"/>			
+					</b:column>		
+					
+					<b:column>
+						<h:outputLabel value="Data Fnal:" />
+						<b:dateTimePicker locale="br" format="DD/MM/YYYY" required="true" requiredMessage="Data final obrigatória" value="#{lancamentoBean.lancamento.dataFin}"/>				
+					</b:column>		
+					
+					<b:column>
+						<h:panelGroup>
+							<h:commandButton action="#{lancamentoBean.novo()}" value="Novo" image="/resources/img/add.png">
+								<f:ajax execute="botaoNovo" render="@form"/>
+							</h:commandButton>
+							<h:outputLabel value=" " />
+							<h:commandButton action="#{lancamentoBean.salvar()}" value="Salvar" image="/resources/img/save.png" />
+							<h:outputLabel value=" " />
+							<h:commandButton action="#{lancamentoBean.remove()}" value="Delete" image="/resources/img/delete.png" />
+							<h:outputLabel value=" " />
+							<h:commandButton value="Limpar" action="#{lancamentoBean.limpar()}" image="/resources/img/reset.png">
+								<f:ajax execute="botaoLimpar" render="@form"/>
+							</h:commandButton>
+						</h:panelGroup>
+					</b:column>				
+				</b:panel>			
 			
 			</b:panelGrid>
 		</b:form>

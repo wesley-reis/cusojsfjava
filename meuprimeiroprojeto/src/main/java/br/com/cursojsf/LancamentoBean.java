@@ -77,7 +77,7 @@ public class LancamentoBean implements Serializable {
 		
 		Pessoa pessoaUser = (Pessoa) session.getAttribute("usuarioLogado");
 		
-		lancamentos = daoLancamento.consultar(pessoaUser.getId());
+		lancamentos = daoLancamento.consultarLimit10(pessoaUser.getId());
 	}
 	
 	public String novo() {

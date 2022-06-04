@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:b="http://bootsfaces.net/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>JSF | Rel.Lançamento</title>
+</h:head>
+<h:body>
+
+	<ui:include src="/menu.xhtml" />
+	<div style="padding-right: 40px; padding-left:40px;">
+		<b:messages autoUpdate="true"/>
+		<b:form id="formRelLancamento">
+			<b:panelGrid columns="2">
+				<b:column>
+					<h:outputLabel value="Data Inicio:" />
+					<b:dateTimePicker locale="br" format="DD/MM/YYYY" value="#{relLancamento.dataIni}"/>
+				</b:column>
+				
+				<b:column>
+					<h:outputLabel value="Data Fim:" />
+					<b:dateTimePicker locale="br" format="DD/MM/YYYY" value="#{relLancamento.dataFin}"/>
+				</b:column>
+				
+				<b:column>
+					<h:outputLabel value="Número da Nota:" />
+					<b:inputText value="#{relLancamento.numNota}"/>
+				</b:column>
+			
+			</b:panelGrid>
+			<b:column>
+				<b:commandButton action="#{relLancamento.buscarLancamento()}" value="Buscar" look="primary"/>
+			</b:column>
+		</b:form>
+		<hr/>
+		
+		<b:form id="formTableLancamentos">		
+			<b:dataTable value="#{relLancamento.lancamentos}" var="Lanc" border="1" cellspacing="0" pdf="true" excel="true" >
+				<b:dataTableColumn value="#{Lanc.id}" label="ID"/>
+				<b:dataTableColumn value="#{Lanc.numeroNotaFiscal}" label="Número da nota"/>
+				<b:dataTableColumn value="#{Lanc.usuario.nome}" label="User"/>
+				<b:dataTableColumn value="#{Lanc.dataIni}" label="Data Inicio"/>
+				<b:dataTableColumn value="#{Lanc.dataFin}" label="Data Fim"/>
+			</b:dataTable>
+		</b:form>
+	</div>
+
+</h:body>
+</html>

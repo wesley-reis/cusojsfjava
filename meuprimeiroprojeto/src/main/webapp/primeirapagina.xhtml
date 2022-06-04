@@ -79,12 +79,7 @@
 				
 				<b:column>
 					<h:outputLabel value="Data Nascimento:" />
-					<b:inputText value="#{pessoaBean.pessoa.dataNascimento}"
-						pt:placeholder="00/00/0000"
-						converterMessage="Data Nascimento errada!">
-						<f:convertDateTime timeZone="America/Sao_Paulo"
-							pattern="dd/mm/yyyy" />
-					</b:inputText>				
+					<b:dateTimePicker value="#{pessoaBean.pessoa.dataNascimento}" locale="br" format="DD/MM/YYYY" />						
 				</b:column>
 
 				<b:column>
@@ -240,7 +235,8 @@
 		</b:form>
 
 		<b:form id="formTable" rendered="#{pessoaBean.permitirAcesso('ADM')}">
-			<b:dataTable value="#{pessoaBean.pessoas}" var="person" border="1"
+			<b:dataTable value="#{pessoaBean.pessoas}" 
+				var="person" border="1"
 				cellspacing="0">
 				<f:facet name="header">
 					<h:outputText value="Lista de Usuários Cadastrados" />
