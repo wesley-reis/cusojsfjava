@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:b="http://bootsfaces.net/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<link href="/resources/css/style.css" rel="stylesheet"/>
+	<title>JSF | Rel.Usuário</title>
+</h:head>
+<h:body>
+
+	<ui:include src="/menu.xhtml" />
+	<div style="padding-right: 40px; padding-left:40px;">
+		<b:messages autoUpdate="true"/>
+		<b:form id="formRelUsuario">
+			<b:panelGrid columns="2">
+				<b:panel>
+					<b:column>
+						<h:outputLabel value="Data Inicio:" />
+						<b:dateTimePicker locale="br" format="DD/MM/YYYY" value="#{relUsuario.dataIni}"/>
+					</b:column>
+					
+					<b:column>
+						<h:outputLabel value="Data Fim:" />
+						<b:dateTimePicker locale="br" format="DD/MM/YYYY" value="#{relUsuario.dataFin}"/>
+					</b:column>
+					
+					<b:column>
+						<h:outputLabel value="Nome:" />
+						<b:inputText value="#{relUsuario.nome}"/>
+					</b:column>
+				</b:panel>
+			</b:panelGrid>
+			<b:column>
+				<b:commandButton action="#{relUsuario.buscarUsuarios()}" value="Buscar" look="primary"/>
+			</b:column>
+		</b:form>
+		<hr/>
+		
+		<b:form id="formTableUsuarios">		
+			<b:dataTable value="#{relUsuario.pessoas}" var="p" border="1" cellspacing="0" pdf="true" excel="true" >
+				<b:dataTableColumn value="#{p.id}" label="ID"/>
+				<b:dataTableColumn value="#{p.nome}" label="Nome"/>
+				<b:dataTableColumn value="#{p.dataNascimento}" label="Data Nascimento"/>
+			</b:dataTable>
+		</b:form>
+	</div>
+
+</h:body>
+</html>

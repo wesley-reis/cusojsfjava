@@ -22,7 +22,7 @@
 			rendered="#{pessoaBean.permitirAcesso('ADM')}">
 			
 			<b:panelGrid columns="2">
-
+				<b:panel>
 				<f:facet name="header">
 					<h:outputText value="Cadastro de Usuário" />
 				</f:facet>
@@ -54,17 +54,17 @@
 
 				<b:column>
 					<h:outputLabel value="Idade:" />
-					<b:inputText value="#{pessoaBean.pessoa.idade}" />				
+					<b:inputText value="#{pessoaBean.pessoa.idade}" mask="numeric" />				
 				</b:column>
 				
 				<b:column>
 					<h:outputLabel value="CPF:" />
-					<b:inputText value="#{pessoaBean.pessoa.cpf}" />				
+					<b:inputText value="#{pessoaBean.pessoa.cpf}" mask="999.999.999-99" />				
 				</b:column>
 				
 				<b:column>
 					<h:outputLabel value="Titulo Eleitor:" />
-					<b:inputText value="#{pessoaBean.pessoa.tituloEleitor}" />				
+					<b:inputText value="#{pessoaBean.pessoa.tituloEleitor}" mask="numeric"/>				
 				</b:column>
 				
 				<b:column>
@@ -146,6 +146,9 @@
 					</h:selectManyCheckbox>				
 				</b:column>
 				
+				</b:panel>
+				<b:panel>
+				
 				<b:column>
 					<h:outputLabel value="Estados:" />
 					<b:selectOneMenu value="#{pessoaBean.pessoa.estados}"
@@ -170,7 +173,7 @@
 
 				<b:column>
 					<h:outputLabel value="CEP:" />
-					<b:inputText value="#{pessoaBean.pessoa.cep}">
+					<b:inputText value="#{pessoaBean.pessoa.cep}" mask="99999-999">
 						<f:ajax event="blur" execute="@this"
 							listener="#{pessoaBean.pesquisaCep}"
 							render="logradouro complemento bairro localidade uf" />
@@ -207,7 +210,6 @@
 					<h:outputLabel value="UF" />
 					<b:inputText value="#{pessoaBean.pessoa.uf}" id="uf" />				
 				</b:column>
-
 			<h:outputLabel />
 					<h:panelGroup>
 						<h:commandButton action="#{pessoaBean.novo()}" value="Novo"
@@ -227,9 +229,7 @@
 							<f:ajax execute="botaoLimpar" render="@form" />
 						</h:commandButton>
 					</h:panelGroup>				
-			
-
-
+				</b:panel>
 			</b:panelGrid>
 			<hr />
 		</b:form>

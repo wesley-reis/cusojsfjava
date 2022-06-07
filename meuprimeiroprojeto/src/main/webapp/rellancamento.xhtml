@@ -6,6 +6,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
+	<link href="/resources/css/style.css" rel="stylesheet"/>
 	<title>JSF | Rel.Lançamento</title>
 </h:head>
 <h:body>
@@ -15,21 +16,22 @@
 		<b:messages autoUpdate="true"/>
 		<b:form id="formRelLancamento">
 			<b:panelGrid columns="2">
-				<b:column>
-					<h:outputLabel value="Data Inicio:" />
-					<b:dateTimePicker locale="br" format="DD/MM/YYYY" value="#{relLancamento.dataIni}"/>
-				</b:column>
-				
-				<b:column>
-					<h:outputLabel value="Data Fim:" />
-					<b:dateTimePicker locale="br" format="DD/MM/YYYY" value="#{relLancamento.dataFin}"/>
-				</b:column>
-				
-				<b:column>
-					<h:outputLabel value="Número da Nota:" />
-					<b:inputText value="#{relLancamento.numNota}"/>
-				</b:column>
-			
+				<b:panel>
+					<b:column>
+						<h:outputLabel value="Data Inicio:" />
+						<b:dateTimePicker locale="br" format="DD/MM/YYYY" value="#{relLancamento.dataIni}"/>
+					</b:column>
+					
+					<b:column>
+						<h:outputLabel value="Data Fim:" />
+						<b:dateTimePicker locale="br" format="DD/MM/YYYY" value="#{relLancamento.dataFin}"/>
+					</b:column>
+					
+					<b:column>
+						<h:outputLabel value="Número da Nota:" />
+						<b:inputText value="#{relLancamento.numNota}"/>
+					</b:column>
+				</b:panel>
 			</b:panelGrid>
 			<b:column>
 				<b:commandButton action="#{relLancamento.buscarLancamento()}" value="Buscar" look="primary"/>

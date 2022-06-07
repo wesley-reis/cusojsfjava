@@ -1,7 +1,9 @@
 package br.com.repository;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.model.SelectItem;
@@ -57,6 +59,70 @@ public class IDaoPessoaImpl implements IDaoPessoa, Serializable {
 		}
 		
 		return selectItems;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Pessoa> consultaLimit10() {
+		List<Pessoa> lista = null;
+		
+		EntityTransaction entityTransaction = entityManager.getTransaction();
+		entityTransaction.begin();
+		
+		lista = entityManager.createQuery("from Pessoa order by id desc ").setMaxResults(10).getResultList();
+		
+		entityTransaction.commit();
+
+		return lista;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Pessoa> relatorioPessoa(String nome, Date dataIni, Date dataFin) {
+		
+		List<Pessoa> pessoas = new ArrayList<Pessoa>();
+		
+		StringBuilder sql = new StringBuilder();
+		
+		sql.append(" select l from Pessoa l ");
+		
+		if(dataIni == null && dataFin == null && nome != null && !nome.isEmpty()) {
+			sql.append(" where upper(l.nome) like '%").append(nome.trim().toUpperCase()).append("%'");
+			
+		}else if (nome == null || (nome !=null && nome.isEmpty()) && dataIni != null && dataFin == null) {
+			
+			String dataIniString = new SimpleDateFormat("yyyy-MM-dd").format(dataIni);
+			sql.append(" where l.dataNascimento >= '").append(dataIniString).append("'");
+			
+		}else if (nome == null || (nome !=null && nome.isEmpty()) && dataIni == null && dataFin != null) {
+			
+			String dataFinString = new SimpleDateFormat("yyyy-MM-dd").format(dataFin);
+			sql.append(" where l.dataNascimento <= '").append(dataFinString).append("'");
+			
+		}else if(nome == null || (nome !=null && nome.isEmpty()) && dataIni != null && dataFin != null ) {
+			String dataIniString = new SimpleDateFormat("yyyy-MM-dd").format(dataIni);
+			String dataFinString = new SimpleDateFormat("yyyy-MM-dd").format(dataFin);
+			
+			sql.append(" where l.dataNascimento >= '").append(dataIniString).append("' ");
+			sql.append(" and l.dataNascimento <= '").append(dataFinString).append("' ");
+			
+		}else if(nome !=null && !nome.isEmpty() && dataIni != null && dataFin != null ) {
+			String dataIniString = new SimpleDateFormat("yyyy-MM-dd").format(dataIni);
+			String dataFinString = new SimpleDateFormat("yyyy-MM-dd").format(dataFin);
+			
+			sql.append(" where l.dataNascimento >= '").append(dataIniString).append("' ");
+			sql.append(" and l.dataNascimento <= '").append(dataFinString).append("' ");
+			sql.append(" and upper(l.nome) like '%").append(nome.trim().toUpperCase()).append("%'");
+		}
+		
+		
+		EntityTransaction transaction = entityManager.getTransaction();
+		transaction.begin();
+	
+		pessoas = entityManager.createQuery(sql.toString()).getResultList();
+		transaction.commit();
+		
+		return pessoas;
 	}
 
 }

@@ -74,7 +74,7 @@ public class DaoGenerico<E> implements Serializable{
 		entityTransaction.begin();
 		
 		List<E> retorno = entityManager.createQuery("from " + entidade.getName()  + " order by id desc ")
-				.setFirstResult(10).getResultList();
+				.setMaxResults(10).getResultList();
 		
 		entityTransaction.commit();
 
